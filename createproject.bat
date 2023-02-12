@@ -1,1 +1,1 @@
-vpc +gayEngine /TESTGAME /win64 /mksln gayEngine.sln
+vpc +gayEngine /TESTGAME /win64 /mksln laba.sln
