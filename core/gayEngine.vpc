@@ -1,0 +1,106 @@
+$Macro 	SRCDIR		".."
+$Macro 	OUTBINDIR 	"..\build"
+$Macro	OUTBINNAME 	"EngCompGraph_HaripovTimur_PRO-232B"
+
+$Include "$SRCDIR/build_scripts/exe_base.vpc"
+
+$Configuration
+{
+	$Debugging
+	{
+		$Command "build/$OUTBINNAME.exe"
+		$WorkingDirectory "../build"
+	}
+	$Compiler
+	{
+		$AdditionalIncludeDirectories "$BASE;$(VULKAN_SDK)/Include" [$WIN32||$WIN64]
+		$AdditionalIncludeDirectories "$BASE;thirdparty/physx" [$POSIX]
+	}
+	$Linker
+	{
+		$AdditionalLibraryDirectories 	"$BASE;$(VULKAN_SDK)/Lib"
+		$AdditionalDependencies			"$BASE;vulkan-1.lib" [$WIN32||$WIN64]
+	}
+}
+
+$Project "gayEngine"
+{
+	$Folder "Исходные файлы"
+	{
+		$File 					"main.cpp"
+		$Folder "core"
+		{
+			$File 				"core.cpp"
+			$File 				"core.h"
+		}
+
+		$Folder "debug"
+		{
+			$File				"debugging/log.cpp"
+			$File				"debugging/log.h"
+		}
+
+		$Folder "thread"
+		{
+			$File				"thread/asyncthread.cpp"
+			$File				"thread/asyncthread.h"
+			$File				"thread/sync.cpp"
+			$File				"thread/sync.h"
+		}
+
+		$Folder "window"
+		{
+			$File 				"window/windowmanager.h"
+			$File 				"window/windowmanager.cpp"
+			$File 				"window/windowdefs.h"
+			$File 				"window/window.h"
+			$File 				"window/window.cpp"
+		}
+
+		$Folder "graphics"
+		{
+			$Folder "render"
+			{
+				$File "graphics/render/renderinterface.h"
+				$File "graphics/render/vulkan_impl.cpp"
+			}
+		}
+		$Folder "files"
+		{
+			$File 			"files/files.cpp"
+			$File 			"files/files.h"
+		}
+		$Folder "types"
+		{
+			$Folder "string"
+			{
+				$File 			"public/string/string.cpp"
+			}
+		}
+	}
+
+	$Folder "Файлы заголовков"
+	{
+		$File 					"public/list.h"
+		$File					"public/matvec.h"
+		$File 					"public/optional.h"
+		$File 					"public/callback.h"
+		$File 					"public/str.h"
+	}
+
+	$Folder "Файлы ресурсов"
+	{
+		$lib glfw3
+		//physx
+		$ImpLib PhysX_64
+		$Lib PhysXCharacterKinematic_static_64
+		$ImpLib PhysXCommon_64
+		$Lib PhysXExtensions_static_64
+		$ImpLib PhysXFoundation_64
+		$Lib PhysXPvdSDK_static_64
+		$ImpLib GL [$POSIX]
+		$ImpLib X11 [$POSIX]
+		$ImpLib sndfile
+		$lib portaudio_x64 [$WINDOWS]
+	}
+}

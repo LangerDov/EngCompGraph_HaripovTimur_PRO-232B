@@ -1,0 +1,3 @@
+$Include "$SRCDIR/build_scripts/platform_dirs.vpc"
+$Include "$SRCDIR/build_scripts/exe_posix_base.vpc" [$POSIX]
+$Include "$SRCDIR/build_scripts/exe_win32_base.vpc" [$WIN32 || $WIN64]

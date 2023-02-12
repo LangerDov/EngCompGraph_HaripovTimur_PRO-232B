@@ -1,0 +1,156 @@
+$MacroRequired				"SRCDIR"
+$MacroRequired				"OUTBINNAME"
+$MacroRequired				"OUTBINDIR"
+$MacroRequired				"PLATSUBDIR"
+
+$Macro						"_SUBDIRSUFFIX"		"$PLATSUBDIR"
+
+$Configuration "Debug"
+{
+	$General
+	{
+		// General
+		$OutputDirectory							".\Debug$_SUBDIRSUFFIX"
+		$IntermediateDirectory						".\Debug$_SUBDIRSUFFIX"
+		$ExtensionsToDeleteOnClean
+		$BuildLogFile
+		$InheritedProjectPropertySheets
+
+		// Project Defaults
+		$ConfigurationType							"Application (.exe)"
+		$UseOfMFC
+		$UseOfATL
+		$MinimizeCRTUseInATL
+		$CharacterSet								"Use Multi-Byte Character Set"
+		$CommonLanguageRuntimeSupport
+		$WholeProgramOptimization
+	}
+
+	$Compiler
+	{
+		//general
+		$AdditionalIncludeDirectories 				"$BASE;./;thirdparty;public"
+		$DebugInformationFormat 					"Program Database for Edit & Continue (/ZI)"
+		$WarningLevel								"Level 3 (/W3)"
+		$TreatWarningsAsErrors						"No"
+		//optimization
+		$Optimization								"Disabled (/Od)"
+		//preprocessor
+		$PreprocessorDefinitions 					"$BASE;WIN32;_DEBUG;_CRT_SECURE_NO_WARNINGS;_MBCS"
+		//code generation
+		$EnableC++Exceptions 						"No"
+		$RuntimeLibrary								"Multi-threaded Debug (/MTd)"
+		$BasicRuntimeChecks							"Both (/RTC1, equiv. to /RTCsu) (/RTC1)"
+		//language
+		$TreatWCHAR_TAsBuiltInType					"Yes (/Zc:wchar_t)"
+		$ForceConformanceInForLoopScope				"Yes (/Zc:forScope)"
+		$EnableRunTimeTypeInfo						"Yes (/GR)"
+		// Precompiled Headers
+		$Create/UsePrecompiledHeader				"Not Using Precompiled Headers"
+		$Create/UsePCHThroughFile
+		$PrecompiledHeaderFile
+		// Output Files
+		$ExpandAttributedSource						"No"
+		$AssemblerOutput							"No Listing"
+		$ASMListLocation							"$(IntDir)/"
+		$ObjectFileName								"$(IntDir)/"
+		$ProgramDatabaseFileName					"$(IntDir)/"
+		$GenerateXMLDocumentationFiles
+		$XMLDocumentationFileName
+		// Browse Information
+		$EnableBrowseInformation					"None"
+		$BrowseFile									"$(IntDir)/"
+		// Advanced
+		$CallingConvention
+		$CompileAs									"Compile as C++ Code (/TP)"
+		$DisableSpecificWarnings
+		$ForceIncludes
+		$Force#Using
+		$ShowIncludes
+		$UndefinePreprocessorDefinitions
+		$UndefineAllPreprocessorDefinitions
+		$UseFullPaths								"Yes (/FC)"
+		$OmitDefaultLibraryNames
+		$ErrorReporting								"Prompt Immediately (/errorReport:prompt)"
+	}
+	$Linker
+	{
+		// General
+		$OutputFile									"$(OutDir)/$OUTBINNAME.exe"
+		$ShowProgress								"Not Set"
+		$Version	
+		$EnableIncrementalLinking					"Yes (/INCREMENTAL)"
+		$SuppressStartupBanner						"Yes (/NOLOGO)"
+		$IgnoreImportLibrary
+		$RegisterOutput
+		$AdditionalLibraryDirectories
+		$LinkLibraryDependencies
+		$UseLibraryDependencyInputs
+		$UseUNICODEResponseFiles					"No"
+
+		// Manifest File
+		$GenerateManifest							"Yes"
+
+
+		$RandomizedBaseAddress						"false"
+
+		// Debugging
+		$GenerateDebugInfo							"Yes (/DEBUG)"
+		$GenerateProgramDatabaseFile				"$(OutDir)/$(TargetName).pdb"
+		$StripPrivateSymbols
+		$MapExports
+		$DebuggableAssembly
+
+		$ErrorReporting								"Prompt Immediately (/ERRORREPORT:PROMPT)"
+	}
+
+	$ManifestTool
+	{
+		// General
+		$SuppressStartupBanner						"Yes (/nologo)"
+		$VerboseOutput
+		$AssemblyIdentity
+		$UseUNICODEResponseFiles
+		$UseFAT32WorkAround
+
+		// Input And Output
+		$AdditionalManifestFiles
+		$InputResourceManifests
+		$EmbedManifest
+		$OutputManifestFile
+		$ManifestResourceFile
+		$GenerateCatalogFiles
+		$DependencyInformationFile
+
+		// Isolated COM
+		$TypeLibraryFile
+		$RegistrarScriptFile
+		$ComponentFileName
+		$ReplacementsFile
+
+		// Advanced
+		$UpdateFileHashes
+		$UpdateFileHashesSearchPath
+
+		// Command Line
+		$AdditionalOptions			
+	}
+
+	$XMLDocumentGenerator
+	{
+		// General
+		$SuppressStartupBanner						"Yes (/nologo)"
+		$ValidateIntelliSense
+		$AdditionalDocumentFiles
+		$OutputDocumentFile
+		$DocumentLibraryDependencies
+		$UseUNICODEResponseFiles
+	}
+
+	$BrowseInformation
+	{
+		$SuppressStartupBanner						"Yes (/nologo)"	
+		$OutputFile									"$(OutDir)/$OUTBINNAME.bsc"
+		$AdditionalOptions
+	}
+}

@@ -1,0 +1,19 @@
+//-----------------------------------------------------------------------------
+//	PROJECTS.VGC
+//
+//	Project Configurations for all gDevelopers projects
+//-----------------------------------------------------------------------------
+
+/////////////////////////
+// Project definitions //
+/////////////////////////
+
+$Project "gayEngine"
+{
+	"core/gayEngine.vpc" [$WINDOWS||$POSIX]
+}
+
+$Project "testscripts"
+{
+	"testscripts.vpc" [$POSIX]
+}

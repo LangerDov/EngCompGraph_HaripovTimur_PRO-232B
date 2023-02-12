@@ -1,0 +1,22 @@
+// settings for win32 applications
+
+$Configuration
+{
+	$General
+	{
+		$PlatformToolset 							"v143" [$VS2022]
+	}
+	
+	$Compiler
+	{
+		$MultiProcessorCompilation 					"True"
+		$PreprocessorDefinitions 					"$BASE;WIN64" [$WIN64]
+		$PreprocessorDefinitions 					"$BASE;ARCH_WIN32" [$WIN32] 
+		$PreprocessorDefinitions					"$BASE;COMPILER_MSVC"
+		$EnableEnhancedInstructionSet 				"Streaming SIMD Extensions 2 (/arch:SSE2)" [$WIN32]
+		$FloatingPointModel							"Fast (/fp:fast)"
+		$EnableC++Exceptions						"Yes (/EHsc)"
+		$ConformanceMode							"True"
+	}
+}
+

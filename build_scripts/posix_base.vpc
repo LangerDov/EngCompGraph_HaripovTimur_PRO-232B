@@ -1,0 +1,43 @@
+$MacroRequired "SRCDIR"
+
+$Macro LIBPUBLIC "$SRCDIR/lib/posix"
+
+$Configuration "Debug"
+{
+	$Compiler
+	{
+		$PreprocessorDefinitions 					"$BASE;DEBUG;_DEBUG"
+		$OptimizerLevel								"-ggdb -O0"
+	}
+}
+
+$Configuration "Release"
+{
+	$Compiler
+	{
+		$PreprocessorDefinitions					"$BASE;NDEBUG"
+		$OptimizerLevel								"-O2 -fno-strict-aliasing -ffast-math -fno-omit-frame-pointer -ftree-vectorize"
+	}
+}
+
+$Configuration
+{
+	$General
+	{
+		$ConfigurationType							"Application (.exe)"
+	}
+
+	$Compiler
+	{
+		$AdditionalIncludeDirectories				"$BASE;./;thirdparty;public"
+		$PreprocessorDefinitions					"$BASE;GNU;GCC_COMPILER"
+		$PreprocessorDefinitions					"$BASE;LINUX32" [$LINUX32]
+		$PreprocessorDefinitions					"$BASE;LINUX64" [$LINUX64]
+		$GCC_ExtraCompilerFlags 					"$BASE -fpermissive"
+	}
+
+	$Linker
+	{
+		$GCC_ExtraLinkerFlags						"$BASE -march=native -mtune=native -mfpmath=sse"
+	}
+}

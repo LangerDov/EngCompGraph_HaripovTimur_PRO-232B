@@ -1,0 +1,1 @@
+vpc +gayEngine /TESTGAME /win64 /mksln gayEngine.sln

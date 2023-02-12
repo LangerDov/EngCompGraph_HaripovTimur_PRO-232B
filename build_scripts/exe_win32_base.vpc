@@ -1,0 +1,37 @@
+$MacroRequired "SRCDIR"
+$MacroRequired "OUTBINNAME"
+$MacroRequired "OUTBINDIR"
+
+$Macro LIBPUBLIC "$SRCDIR/lib"
+
+$Include "$SRCDIR/build_scripts/exe_win32_debug.vpc"
+$Include "$SRCDIR/build_scripts/exe_win32_release.vpc"
+$Include "$SRCDIR/build_scripts/win32_base.vpc"
+
+$Configuration
+{
+	$General
+	{
+		$TargetName "$OUTBINNAME"
+	}
+
+	$Compiler
+	{
+		$DisableSpecificWarnings			"$BASE;4244"
+	}
+
+	$Linker
+	{
+		$AdditionalDependencies				"$BASE kernel32.lib winspool.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib shell32.lib user32.lib advapi32.lib gdi32.lib comdlg32.lib ole32.lib" 
+		$TargetMachine						"MachineX86 (/MACHINE:X86)"	[$WIN32]
+		$TargetMachine						"MachineX64 (/MACHINE:X64)"	[$WIN64]
+		$SubSystem 							"Windows (/SUBSYSTEM:WINDOWS)" [$WIN32||$WIN64]
+	}
+
+	$PostBuildEvent
+	{
+		$CommandLine						"copy $(TargetDir)$(TargetName).exe $OUTBINDIR\$OUTBINNAME.exe" "\n" \
+											"copy $(TargetDir)$(TargetName).pdb $OUTBINDIR\$OUTBINNAME.pdb"
+		$Description						"Copying exe and pdb to build folder..."
+	}
+}

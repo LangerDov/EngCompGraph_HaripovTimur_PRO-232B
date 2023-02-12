@@ -1,0 +1,145 @@
+$MacroRequired				"SRCDIR"
+$MacroRequired				"OUTBINNAME"
+$MacroRequired				"OUTBINDIR"
+$MacroRequired				"PLATSUBDIR"
+
+$Macro						"_SUBDIRSUFFIX"		"$PLATSUBDIR"
+
+$Configuration "Release"
+{
+	$General
+	{
+		// General
+		$OutputDirectory					".\Release$_SUBDIRSUFFIX"	[!$RETAIL && !$PROFILE]
+		$IntermediateDirectory				".\Release$_SUBDIRSUFFIX"	[!$RETAIL && !$PROFILE]
+		$OutputDirectory					".\Retail$_SUBDIRSUFFIX"	[$RETAIL]
+		$IntermediateDirectory				".\Retail$_SUBDIRSUFFIX"	[$RETAIL]
+		$OutputDirectory					".\Profile$_SUBDIRSUFFIX"	[!$RETAIL && $PROFILE]
+		$IntermediateDirectory				".\Profile$_SUBDIRSUFFIX"	[!$RETAIL && $PROFILE]
+		$ExtensionsToDeleteOnClean
+		$BuildLogFile
+		$InheritedProjectPropertySheets
+
+		// Project Defaults
+		$ConfigurationType						"Application (.exe)"
+		$UseOfMFC
+		$UseOfATL
+		$MinimizeCRTUseInATL
+		$CharacterSet							"Use Multi-Byte Character Set"
+		$CommonLanguageRuntimeSupport
+		$WholeProgramOptimization				"Use Link Time Code Generation" [$LTCG]
+	}
+
+	$Compiler
+	{
+		//General
+		$AdditionalIncludeDirectories 			"$BASE;./;thirdparty;public"
+		$DebugInformationFormat					"Program Database (/Zi)"
+		$WarningLevel							"Level 3 (/W3)"
+		// Optimization
+		$Optimization							"Maximize Speed (/O2)"
+		$InlineFunctionExpansion				"Any Suitable (/Ob2)"
+		$EnableIntrinsicFunctions				"Yes (/Oi)"
+		$FavorSizeOrSpeed						"Favor Fast Code (/Ot)"
+		$OmitFramePointers
+		$EnableFiberSafeOptimizations
+		$WholeProgramOptimization
+		// Preprocessor
+		$PreprocessorDefinitions				"$BASE;NDEBUG;WIN32;_CRT_SECURE_NO_WARNINGS;_MBCS"
+		// Code Generation
+		$RuntimeLibrary							"Multi-threaded (/MT)"
+		$EnableC++Exceptions					"No"
+		$BasicRuntimeChecks						"Default"
+		// Language
+		$DisableLanguageExtensions
+		$DefaultCharUnsigned					"No"
+		$TreatWCHAR_TAsBuiltInType				"Yes (/Zc:wchar_t)"
+		$ForceConformanceInForLoopScope			"Yes (/Zc:forScope)"
+		$EnableRunTimeTypeInfo					"Yes (/GR)"
+		$OpenMPSupport							"No"
+		// Precompiled Headers
+		$Create/UsePrecompiledHeader			"Not Using Precompiled Headers"
+		$Create/UsePCHThroughFile
+		$PrecompiledHeaderFile
+		// Output Files
+		$ExpandAttributedSource					"No"
+		$AssemblerOutput						"No Listing"
+		$ASMListLocation						"$(IntDir)/"
+		$ObjectFileName							"$(IntDir)/"
+		$ProgramDatabaseFileName				"$(IntDir)/"
+		$GenerateXMLDocumentationFiles
+		$XMLDocumentationFileName
+		// Browse Information
+		$EnableBrowseInformation				"None"
+		$BrowseFile								"$(IntDir)/"
+		// Advanced
+		$CallingConvention
+		$CompileAs								"Compile as C++ Code (/TP)"
+		$DisableSpecificWarnings
+		$ForceIncludes
+		$Force#Using
+		$ShowIncludes
+		$UndefinePreprocessorDefinitions
+		$UndefineAllPreprocessorDefinitions
+		$UseFullPaths							"Yes (/FC)"
+		$OmitDefaultLibraryNames
+		$ErrorReporting							"Prompt Immediately (/errorReport:prompt)"
+	}
+
+	$Linker
+	{
+		// General
+		$OutputFile								"$(OutDir)/$OUTBINNAME.exe"
+		$EnableIncrementalLinking				"No (/INCREMENTAL:NO)"
+		$SuppressStartupBanner					"Yes (/NOLOGO)"
+		// Manifest File
+		$GenerateManifest						"Yes"
+		$ManifestFile
+		$AdditionalManifestDependencies
+		$AllowIsolation
+		$UACExecutionLevel
+		// Debugging
+		$GenerateDebugInfo						"Yes (/DEBUG)"
+		$GenerateProgramDatabaseFile			"$(OutDir)/$(TargetName).pdb"
+		$StripPrivateSymbols
+		$MapExports
+		$DebuggableAssembly
+
+		$RandomizedBaseAddress				"true" [$RETAIL]
+		$RandomizedBaseAddress				"false" [!$RETAIL]
+
+		// Optimization
+		$References							"Eliminate Unreferenced Data (/OPT:REF)"
+		// COMDAT folding can be very confusing when debugging and profiling because it can
+		// cause execution to go through nonsensical functions (that happen to be binary
+		// equivalent to the logical function). The performance benefit is small enough that
+		// it is not worth enabling in the development builds. It should be enabled on retail
+		// builds.
+		$EnableCOMDATFolding				"Remove Redundant COMDATs (/OPT:ICF)" [$RETAIL]
+		$EnableCOMDATFolding				"No (/OPT:NOICF)" [!$RETAIL]
+		$OptimizeForWindows98
+		$FunctionOrder
+		$ProfileGuidedDatabase
+		$LinkTimeCodeGeneration
+
+
+		$ErrorReporting							"Prompt Immediately (/ERRORREPORT:PROMPT)"
+	}
+
+	$ManifestTool
+	{
+		// General
+		$SuppressStartupBanner				"Yes (/nologo)"
+		$VerboseOutput
+		$AssemblyIdentity
+		$UseUNICODEResponseFiles
+		$UseFAT32WorkAround
+	}
+
+	$BrowseInformation
+	{
+		$SuppressStartupBanner				"Yes (/nologo)"	
+		$OutputFile							"$(OutDir)/$OUTBINNAME.bsc"
+		$AdditionalOptions
+	}
+}

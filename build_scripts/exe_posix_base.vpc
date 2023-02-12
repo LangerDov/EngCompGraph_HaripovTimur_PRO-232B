@@ -1,0 +1,9 @@
+$Include "$SRCDIR/build_scripts/posix_base.vpc"
+
+$Configuration
+{
+	$General
+	{
+		$ConfigurationType				"Application (.exe)"
+	}
+}
