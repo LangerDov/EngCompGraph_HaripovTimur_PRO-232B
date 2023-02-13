@@ -552,7 +552,7 @@ bool CVulkanInterface::CreateInstance(msgcallback_t pCallback)
 {
 	VkApplicationInfo appInfo = {};
 	appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
-	appInfo.pApplicationName = "Timure loh";
+	appInfo.pApplicationName = "arslan loh";
 	appInfo.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
 	appInfo.pEngineName = "piskaengine";
 	appInfo.engineVersion = VK_MAKE_VERSION(1, 0, 0);
